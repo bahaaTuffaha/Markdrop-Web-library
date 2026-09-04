@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Login — Markdrop</title>
+  <link rel="stylesheet" href="/static/css/app.css">
+</head>
+<body>
+  <div class="login-wrap">
+    <form id="login-form" class="card login-card">
+      <a class="brand" href="/" style="margin-bottom:16px">
+        <img src="/brand/logo.png" alt="">
+        Markdrop
+      </a>
+      <label>Password
+        <input type="password" name="password" required autofocus>
+      </label>
+      <button class="btn" type="submit">Sign in</button>
+      <p id="login-error" class="hint"></p>
+    </form>
+  </div>
+  <script src="/static/js/api.js"></script>
+  <script>
+    document.getElementById("login-form").addEventListener("submit", async (event) => {
+      event.preventDefault();
+      const password = event.currentTarget.password.value;
+      try {
+        await api.login(password);
+        window.location.href = "/";
+      } catch (_err) {
+        document.getElementById("login-error").textContent = "Invalid password";
+      }
+    });
+  </script>
+</body>
+</html>

@@ -5,6 +5,12 @@ logs/
 # Environment variables
 .env
 
+# Virtualenv
+.venv/
+venv/
+web/frontend/node_modules/
+web/frontend/dist/
+
 # Python bytecode
 __pycache__/
 *.pyc
@@ -27,7 +33,13 @@ pytest_out*.txt
 temp.xlsx
 markdrop.ipynb
 test.pdf
-Dockerfile
+
+# Web library runtime
+/data/
+
+# Accidental unit-test data dirs (tempfile.mkdtemp prefixes)
+/markdrop-web-test-*/
+/markdrop-web-app-*/
 
 # Output directory
 output_dir/

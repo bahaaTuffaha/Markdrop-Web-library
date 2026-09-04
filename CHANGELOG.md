@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## [Unreleased]
+
+### Added
+- Self-hosted web library (`web/`, Docker Compose): drag-and-drop PDFs, Steam-style tiles with live progress, Markdown reader, settings page, and server-side jobs that survive a browser refresh. The `markdrop/` package is unchanged.
+
 ## [4.1.2] - 2026-08-09
 
 ### Removed
