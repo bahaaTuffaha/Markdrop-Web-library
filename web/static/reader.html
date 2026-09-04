@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Reader — Markdrop</title>
+  <link rel="stylesheet" href="/static/css/app.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="/">
+      <img src="/brand/logo.png" alt="">
+      Markdrop
+    </a>
+    <nav class="nav">
+      <a href="/">Library</a>
+      <a href="/settings">Settings</a>
+    </nav>
+  </header>
+  <main class="page reader-wrap">
+    <div class="reader-bar">
+      <a href="/">← Library</a>
+      <h1 id="title" class="page-title" style="letter-spacing:0.04em;text-transform:none;font-size:22px;margin:0">Book</h1>
+      <div class="actions-row">
+        <a id="download" class="btn secondary" href="#">Download zip</a>
+        <button id="delete" class="btn danger" type="button">Delete</button>
+      </div>
+    </div>
+    <article id="content" class="markdown">Loading…</article>
+  </main>
+  <div id="toast" class="toast"></div>
+  <script src="/static/js/api.js"></script>
+  <script src="/static/js/reader.js"></script>
+</body>
+</html>

@@ -1,0 +1,32 @@
+services:
+  web:
+    build:
+      context: .
+      args:
+        MARKDROP_ENGINE: ${MARKDROP_ENGINE:-full}
+        MARKDROP_EXTRAS: ${MARKDROP_EXTRAS:-lite,litellm}
+    image: markdrop-web
+    ports:
+      - "${MARKDROP_WEB_PORT:-8080}:8080"
+    volumes:
+      - markdrop-data:/data
+    environment:
+      MARKDROP_DATA_DIR: /data
+      XDG_CONFIG_HOME: /data/config
+      HF_HOME: /data/cache/hf
+      MARKDROP_ENGINE: ${MARKDROP_ENGINE:-full}
+      MARKDROP_EXTRAS: ${MARKDROP_EXTRAS:-lite,litellm}
+      MARKDROP_WEB_PASSWORD: ${MARKDROP_WEB_PASSWORD:-}
+    # Cap is not reservation. Lite is fine at 2g; full/Docling wants 8g.
+    # Set both: some Docker Desktop builds ignore one or the other.
+    mem_limit: ${MARKDROP_MEM_LIMIT:-8g}
+    memswap_limit: ${MARKDROP_MEM_LIMIT:-8g}
+    deploy:
+      resources:
+        limits:
+          memory: ${MARKDROP_MEM_LIMIT:-8g}
+    shm_size: ${MARKDROP_SHM_SIZE:-64m}
+    restart: unless-stopped
+
+volumes:
+  markdrop-data:

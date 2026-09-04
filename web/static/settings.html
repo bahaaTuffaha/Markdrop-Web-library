@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Settings — Markdrop</title>
+  <link rel="stylesheet" href="/static/css/app.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="/">
+      <img src="/brand/logo.png" alt="">
+      Markdrop
+    </a>
+    <nav class="nav">
+      <a href="/">Library</a>
+      <a href="/settings">Settings</a>
+    </nav>
+  </header>
+  <main class="page">
+    <h1 class="page-title">Settings</h1>
+    <p class="page-sub">Saved on the server. New drops use the snapshot taken at upload time.</p>
+    <form id="settings-form" class="form">
+      <section class="card">
+        <h2>Convert</h2>
+        <p id="engine-note" class="disabled-note" hidden>
+          This image was built with MARKDROP_ENGINE=lite. Normal (Docling) convert is unavailable — rebuild with ENGINE=full to enable it.
+        </p>
+        <label>Mode
+          <select name="convert_mode">
+            <option value="normal">Normal (Docling) — default</option>
+            <option value="fast">Fast (PyMuPDF only)</option>
+          </select>
+        </label>
+        <label class="check"><input type="checkbox" name="add_tables"> Add downloadable Excel tables to HTML</label>
+        <label>Image resolution scale
+          <input type="number" name="image_resolution_scale" min="0.5" max="8" step="0.1">
+        </label>
+        <label>Download button color
+          <input type="text" name="download_button_color">
+        </label>
+      </section>
+
+      <section class="card">
+        <h2>Describe (optional)</h2>
+        <p class="hint">Off by default. When enabled, runs after convert using the selected provider.</p>
+        <label class="check"><input type="checkbox" name="enable_describe"> Generate AI descriptions after convert</label>
+        <label>Provider
+          <select name="ai_provider">
+            <option value="gemini">gemini</option>
+            <option value="openai">openai</option>
+            <option value="anthropic">anthropic</option>
+            <option value="groq">groq</option>
+            <option value="openrouter">openrouter</option>
+            <option value="litellm">litellm</option>
+          </select>
+        </label>
+        <label>Vision model override <input type="text" name="model" placeholder="leave empty for provider default"></label>
+        <label>Text model override <input type="text" name="text_model" placeholder="leave empty for provider default"></label>
+        <label class="check"><input type="checkbox" name="image_descriptions"> Image descriptions</label>
+        <label class="check"><input type="checkbox" name="table_descriptions"> Table descriptions</label>
+        <label class="check"><input type="checkbox" name="remove_images"> Replace images with descriptions</label>
+        <label class="check"><input type="checkbox" name="remove_tables"> Replace tables with summaries</label>
+        <label>Max retries <input type="number" name="max_retries" min="0" max="20"></label>
+        <label>Retry delay (seconds) <input type="number" name="retry_delay" min="0" max="60"></label>
+        <label>Max concurrency <input type="number" name="max_concurrency" min="1" max="32"></label>
+        <label>Timeout (seconds) <input type="number" name="timeout_seconds" min="10" max="600"></label>
+        <label>Image prompt <textarea name="image_prompt"></textarea></label>
+        <label>Table prompt <textarea name="table_prompt"></textarea></label>
+      </section>
+
+      <section class="card">
+        <h2>API keys</h2>
+        <p class="hint">Stored in the data volume as .env (mode 0600). Leave a field unchanged to keep the saved key. Paste a new key to replace it.</p>
+        <label>Gemini <input type="password" name="key_gemini" autocomplete="off"></label>
+        <label>OpenAI <input type="password" name="key_openai" autocomplete="off"></label>
+        <label>Anthropic <input type="password" name="key_anthropic" autocomplete="off"></label>
+        <label>Groq <input type="password" name="key_groq" autocomplete="off"></label>
+        <label>OpenRouter <input type="password" name="key_openrouter" autocomplete="off"></label>
+        <label>LiteLLM <input type="password" name="key_litellm" autocomplete="off"></label>
+      </section>
+
+      <section class="card">
+        <h2>Server</h2>
+        <label>Max concurrent conversions
+          <input type="number" name="max_concurrent_jobs" min="1" max="4">
+        </label>
+        <p class="hint">Keep this at 1 unless the host has plenty of RAM. Docling is memory-heavy.</p>
+      </section>
+
+      <div class="actions-row">
+        <button class="btn" type="submit">Save settings</button>
+      </div>
+    </form>
+  </main>
+  <div id="toast" class="toast"></div>
+  <script src="/static/js/api.js"></script>
+  <script src="/static/js/settings.js"></script>
+</body>
+</html>

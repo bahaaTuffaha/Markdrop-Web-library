@@ -1,0 +1,15 @@
+# Core markdrop dependencies minus docling / docling_core.
+# Keep in sync with the `dependencies` list in pyproject.toml when merging upstream.
+beautifulsoup4
+openai>=1.0.0
+openpyxl
+packaging
+pandas
+Pillow
+protobuf
+python-dotenv
+pymupdf
+requests
+tqdm
+google-genai
+numpy>=1.26.4

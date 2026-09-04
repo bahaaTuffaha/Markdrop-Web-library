@@ -24,6 +24,28 @@ A Python package for converting PDFs to structured Markdown and interactive HTML
 - [x] Interactive HTML output with downloadable Excel tables
 - [x] Customisable image resolution and UI elements
 - [x] Structured logging (never pollutes your app's root logger)
+- [x] **Web library** (this fork): Docker UI to drop PDFs into a book shelf, convert on the server, and read the Markdown
+
+---
+
+## Web library (this fork)
+
+Drag-and-drop PDFs in the browser. Conversion runs on the server (refresh-safe), each book gets its own folder, and settings match the CLI (`convert` default is normal/Docling).
+
+```bash
+cp .env.example .env
+docker compose up --build
+# http://localhost:8080
+```
+
+Build knobs (same extras as `pip install "markdrop[lite,litellm]"`):
+
+```bash
+MARKDROP_ENGINE=full          # or lite (fast convert only, smaller image)
+MARKDROP_EXTRAS=lite,litellm
+```
+
+Details: [web/README.md](web/README.md).
 
 ---
 
