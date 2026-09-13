@@ -4,6 +4,19 @@ import { api } from "../api.js";
 import Tile from "../components/Tile.jsx";
 import Topbar from "../components/Topbar.jsx";
 
+function tempBookId() {
+  if (typeof crypto !== "undefined" && typeof crypto.randomUUID === "function") {
+    return `tmp-${crypto.randomUUID()}`;
+  }
+  if (typeof crypto !== "undefined" && typeof crypto.getRandomValues === "function") {
+    const bytes = new Uint8Array(16);
+    crypto.getRandomValues(bytes);
+    const hex = [...bytes].map((b) => b.toString(16).padStart(2, "0")).join("");
+    return `tmp-${hex}`;
+  }
+  return `tmp-${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 10)}`;
+}
+
 function mergeBooks(current, incoming) {
   const seen = new Set(incoming.map((book) => book.id));
   const next = [...incoming];
@@ -103,7 +116,7 @@ export default function Library({ showToast }) {
       return;
     }
     for (const file of files) {
-      const tempId = `tmp-${crypto.randomUUID()}`;
+      const tempId = tempBookId();
       setBooks((current) => [
         {
           id: tempId,
